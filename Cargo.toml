@@ -1,10 +1,12 @@
 [package]
-name = "windows_macro"
+name = "lers_windows_macro"
 version = "0.0.3"
-authors = ["lers梦魔 <lersnightmare@gmail.com>"]
+authors = ["lers梦魔"]
 description = "Useful macro for windows-rs"
-keywords = ["proc_macro", "procmacro", "macro"]
 edition = "2021"
+readme = "README.md"
+license = "MIT"
+exclude = ["/src/main.rs", "/target", ".*"]
 
 [lib]
 proc-macro = true

@@ -1,1 +1,1 @@
-Useful macro for [windows-rs](https://github.com/microsoft/windows-rs)
+some useful macros for [windows-rs](https://github.com/microsoft/windows-rs),I'm using it myself.
