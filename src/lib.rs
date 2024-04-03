@@ -1,10 +1,11 @@
 use proc_macro::TokenStream;
 
 use quote::quote;
-use syn::{Data, DeriveInput, Fields, parse_macro_input};
+use syn::{Data, DeriveInput, Fields, parse_macro_input, Path};
 
 #[proc_macro_derive(FromInto)]
-pub fn my_derive(_input: TokenStream) -> TokenStream {
+/// # 为单匿名属性结构体实现From和Into
+pub fn from_into(_input: TokenStream) -> TokenStream {
     let ast: DeriveInput = parse_macro_input!(_input as DeriveInput);
     let _self = &ast.ident;
     let _other = match ast.data {
@@ -38,6 +39,21 @@ pub fn my_derive(_input: TokenStream) -> TokenStream {
         }
     };
     gen.into()
+}
+
+#[proc_macro_attribute]
+/// # 自动将传入参数包装为const attribute
+pub fn self_attr(_attr: TokenStream, item: TokenStream) -> TokenStream
+{
+    let args = _attr.to_string();
+    let mut func = parse_macro_input!(item as syn::ItemImpl);
+    let _self = &func.self_ty;
+    for arg in args.split(",") {
+        let attr = syn::parse_str::<Path>(arg).expect("4").segments.last().expect("5").clone();
+        let target_attr = syn::parse_str::<Path>(arg).expect("3");
+        func.items.push(syn::parse2(quote!(pub const #attr: #_self = #_self(#target_attr);)).expect("2"));
+    }
+    quote!( #func ).into()
 }
 
 #[allow(non_snake_case)]
