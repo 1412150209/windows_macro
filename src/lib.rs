@@ -33,7 +33,7 @@ pub fn my_derive(_input: TokenStream) -> TokenStream {
         }
         impl Into<#_other> for #_self{
             fn into(self) -> #_other{
-                Self.0
+                self.0
             }
         }
     };
