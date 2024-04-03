@@ -6,6 +6,8 @@ description = "Useful macro for windows-rs"
 edition = "2021"
 readme = "README.md"
 license = "MIT"
+homepage = "https://github.com/1412150209/windows_macro"
+repository = "https://github.com/1412150209/windows_macro"
 exclude = ["/src/main.rs", "/target", ".*"]
 
 [lib]
